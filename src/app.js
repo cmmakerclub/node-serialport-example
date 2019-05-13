@@ -15,16 +15,14 @@ let sum = 0x04 + "M" + 50 + 40;
 const msg = Buffer.from(
     [0x02, 0x02, 0x02, "C", 0x04, "M", 50, 40, sum, 0x03]);
 
-setInterval(() => {
-  port.write(msg, err => {
-    if (err)
-      console.log(`serial.write error`, err);
-  });
-}, parseInt(config.DELAY_MS) || 1);
-
 port.on("open", () => {
   console.log("port opened.");
-  retry = false;
+  setInterval(() => {
+    port.write(msg, err => {
+      if (err)
+        console.log(`serial.write error`, err);
+    });
+  }, parseInt(config.DELAY_MS) || 1);
 });
 
 port.on("error", e => {
