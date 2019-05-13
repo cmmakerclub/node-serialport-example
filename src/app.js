@@ -8,6 +8,7 @@ const port = new SerialPort(
       baudRate: parseInt(config.BAUDRATE) || 115200,
     });
 
+console.log(`Config=`, config);
 const parser = port.pipe(new Delimiter({delimiter: "\r\n"}));
 
 let sum = 0x04 + "M" + 50 + 40;
