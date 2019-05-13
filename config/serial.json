@@ -1,0 +1,5 @@
+{
+  "PORT": "/dev/ttyUSB0",
+  "BAUDRATE": 115200,
+  "DELAY_MS": 1
+}

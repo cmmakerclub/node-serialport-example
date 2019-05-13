@@ -1,10 +1,13 @@
 const SerialPort = require("serialport");
 const Delimiter = require("@serialport/parser-delimiter");
 
+let config = require("../config/serial");
+
 const port = new SerialPort(
-    process.env.PORT || "/dev/tty.SLAB_USBtoUART", {
-      baudRate: parseInt(process.env.TARGET_BAUDRATE) || 115200,
+    config.PORT || "/dev/tty.SLAB_USBtoUART", {
+      baudRate: parseInt(config.BAUDRATE) || 115200,
     });
+
 const parser = port.pipe(new Delimiter({delimiter: "\r\n"}));
 
 let sum = 0x04 + "M" + 50 + 40;
@@ -16,7 +19,7 @@ setInterval(() => {
     if (err)
       console.log(`serial.write error`, err);
   });
-}, parseInt(process.env.DELAY) || 1);
+}, parseInt(config.DELAY_MS) || 1);
 
 port.on("open", () => {
   console.log("port opened.");
