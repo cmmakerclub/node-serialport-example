@@ -17,12 +17,15 @@ const msg = Buffer.from(
 
 port.on("open", () => {
   console.log("port opened.");
-  setInterval(() => {
-    port.write(msg, err => {
-      if (err)
-        console.log(`serial.write error`, err);
-    });
-  }, parseInt(config.DELAY_MS) || 1);
+  setTimeout(() => {
+    console.log("starting port.write.");
+    setInterval(() => {
+      port.write(msg, err => {
+        if (err)
+          console.log(`serial.write error`, err);
+      });
+    }, parseInt(config.DELAY_MS) || 1);
+  }, 1000);
 });
 
 port.on("close", () => {
