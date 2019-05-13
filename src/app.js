@@ -16,7 +16,7 @@ setInterval(() => {
     if (err)
       console.log(`serial.write error`, err);
   });
-}, parseInt(process.env.EVERY_MS) || 500);
+}, parseInt(process.env.DELAY) || 1);
 
 port.on("open", () => {
   console.log("port opened.");
