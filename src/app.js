@@ -25,6 +25,13 @@ port.on("open", () => {
   }, parseInt(config.DELAY_MS) || 1);
 });
 
+port.on("close", () => {
+  console.log("on close.");
+  setTimeout(() => {
+    process.exit(-1);
+  }, 2000);
+});
+
 port.on("error", e => {
   console.log("on error", e);
   setTimeout(() => {
