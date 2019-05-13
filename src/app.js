@@ -11,9 +11,13 @@ console.log(`Config=`, config);
 
 const parser = port.pipe(new Delimiter({delimiter: "\r\n"}));
 
-let sum = 0x04 + "M" + 50 + 40;
+let sum = 0x04 + "M".charCodeAt(0) + 50 + 40;
 const msg = Buffer.from(
-    [0x02, 0x02, 0x02, "C", 0x04, "M", 50, 40, sum, 0x03]);
+    [
+      0x02, 0x02, 0x02,
+      "C".charCodeAt(0), 0x04,
+      "M".charCodeAt(0),
+      50, 40, sum, 0x03]);
 
 port.on("open", () => {
   console.log("port opened.");
